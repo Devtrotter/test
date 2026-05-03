@@ -130,13 +130,11 @@
   padding: 9px 14px;
   font-size: 16px;
   color: var(--mute);
-  border-radius: 100px;
-  transition: color 0.2s, background 0.2s;
+  transition: color 0.2s;
 
   &.active,
   &:hover {
     color: var(--ink);
-    background: rgba(255, 255, 255, 0.06);
   }
 }
 
@@ -544,7 +542,7 @@
   gap: 12px;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   color: var(--dim);
   margin-bottom: 32px;
   letter-spacing: 0.15em;
@@ -1232,30 +1230,32 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: stretch;
-  padding: 0 8px;
+  padding: 0 8px 96px;
 
   &__icons {
     position: relative;
     z-index: 50;
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 32px;
     width: 100%;
+    bottom: -92px
   }
 
   &__row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 24px;
+    justify-content: center;
+    gap: 72px;
     width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
   }
 
   &__row--2 {
-    max-width: 360px;
-    margin: 0 auto;
+    max-width: 340px;
   }
 
   &__icon-container {
@@ -1263,31 +1263,27 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    opacity: 0;
-    transform: scale(0.95);
-    animation: skillRadarPop 0.28s ease-out forwards;
   }
 
-  &__icon-box {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    border: 1px solid rgba(71, 85, 105, 0.6);
-    background: rgba(20, 25, 40, 0.85);
+  &__icon-logo {
+    width: 28px;
+    height: 28px;
     display: grid;
     place-items: center;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.06),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.25),
-      0 4px 12px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    color: #fff;
+
+    svg,
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   }
 
   &__icon-label {
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 700;
-    color: rgba(148, 163, 184, 0.95);
+    color: rgba(226, 232, 240, 0.95);
     text-align: center;
     letter-spacing: -0.01em;
     text-transform: none;
@@ -1346,13 +1342,6 @@
   }
 }
 
-@keyframes skillRadarPop {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 @keyframes skillRadarFade {
   to {
     opacity: 1;
@@ -1372,7 +1361,6 @@
   .skill-radar__sweep {
     animation: none;
   }
-  .skill-radar__icon-container,
   .skill-radar__circle {
     animation: none;
     opacity: 1;
@@ -1382,23 +1370,29 @@
 
 @media (min-width: 1024px) {
   .skill-radar {
-    height: 420px;
+    height: 380px;
+    padding-bottom: 120px;
 
     &__icons {
-      gap: 36px;
+      gap: 40px;
+    }
+
+    &__row {
+      max-width: 600px;
+      gap: 96px;
     }
 
     &__row--2 {
-      max-width: 420px;
+      max-width: 400px;
     }
 
-    &__icon-box {
-      width: 56px;
-      height: 56px;
+    &__icon-logo {
+      width: 36px;
+      height: 36px;
     }
 
     &__icon-label {
-      font-size: 12px;
+      font-size: 16px;
     }
   }
 }
@@ -1426,6 +1420,78 @@
 
 .v3-cta-content {
   position: relative;
+  z-index: 2;
+}
+
+.v3-cta-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.18;
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+
+  .image-loader,
+  .image-loader__frame {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .image-loader__frame {
+    aspect-ratio: auto !important;
+  }
+}
+
+.image-loader {
+  position: relative;
+}
+
+.image-loader__frame {
+  position: relative;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-loader__grid {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.image-loader__cell {
+  border-radius: 2px;
+
+  &--circle {
+    border-radius: 9999px;
+  }
+}
+
+.image-loader__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes imageLoaderBlink {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-loader__cell {
+    animation: none !important;
+  }
 }
 
 .v3-cta-tag {
@@ -1472,14 +1538,43 @@
 
 .v3-footer-name {
   font-size: 64px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 0.9;
   margin: 0 0 32px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(183, 148, 246, 0.3));
+  background-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(255, 255, 255, 0.65) 40%,
+      rgba(255, 255, 255, 0.65) 60%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(183, 148, 246, 0.3));
+  background-size: 50% 100%, 100% 100%;
+  background-position: -100% 0, 0 0;
+  background-repeat: no-repeat, no-repeat;
   -webkit-background-clip: text;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: transparent;
+  animation: footerShimmer 3s linear 1.5s infinite;
+}
+
+@keyframes footerShimmer {
+  0% {
+    background-position: -100% 0, 0 0;
+  }
+  50%,
+  100% {
+    background-position: 250% 0, 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-footer-name {
+    animation: none;
+  }
 }
 
 .v3-footer-grid {
@@ -1590,7 +1685,7 @@
       justify-content: center;
     }
     .v3-section {
-      padding: 120px 80px;
+      padding: 84px 80px;
     }
     .v3-services {
       grid-template-columns: repeat(3, 1fr);

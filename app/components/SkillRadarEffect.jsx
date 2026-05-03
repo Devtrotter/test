@@ -4,14 +4,11 @@ import { STACK_LOGOS } from './SkillStackLogos';
 
 const CIRCLE_COUNT = 8;
 
-function IconContainer({ skill, delay }) {
+function IconContainer({ skill }) {
   const Logo = STACK_LOGOS[skill.name];
   return (
-    <div
-      className="skill-radar__icon-container"
-      style={{ animationDelay: `${delay}s` }}
-    >
-      <div className="skill-radar__icon-box">{Logo ? <Logo /> : null}</div>
+    <div className="skill-radar__icon-container">
+      <div className="skill-radar__icon-logo">{Logo ? <Logo /> : null}</div>
       <div className="skill-radar__icon-label">{skill.name}</div>
     </div>
   );
@@ -47,14 +44,14 @@ export default function SkillRadarEffect({ skills }) {
     <div className="skill-radar" role="list" aria-label="Stack moderne">
       <div className="skill-radar__icons">
         <div className="skill-radar__row skill-radar__row--3">
-          {top.map((s, i) => (
-            <IconContainer key={s.name} skill={s} delay={0.15 + i * 0.1} />
+          {top.map((s) => (
+            <IconContainer key={s.name} skill={s} />
           ))}
         </div>
         {bottom.length > 0 && (
           <div className="skill-radar__row skill-radar__row--2">
-            {bottom.map((s, i) => (
-              <IconContainer key={s.name} skill={s} delay={0.5 + i * 0.1} />
+            {bottom.map((s) => (
+              <IconContainer key={s.name} skill={s} />
             ))}
           </div>
         )}

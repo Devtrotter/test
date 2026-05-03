@@ -39,7 +39,6 @@ export const PORTFOLIO_DATA = {
       tag: "Parcours",
       title: ["Six ans, ", "et après."],
       titleIt: "et après.",
-      sub: "De salarié à freelance, en passant par le lead tech. Une trajectoire orientée produit.",
       detailsLabel: "Détails",
       items: [
         { date: "2023 — Présent", role: "Développeur Web Freelance", co: "Dev Trotter · Élancourt", desc: "Création de sites Next.js premium pour PME et startups. Spécialisé performance & SEO." },
