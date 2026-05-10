@@ -1,8 +1,10 @@
 import { Geist, Geist_Mono } from 'next/font/google';
 import './styles/globals.scss';
 import './styles/portfolio.scss';
+import './styles/cookie-consent.scss';
 import SmoothScroll from './components/SmoothScroll';
 import SpotlightPointer from './components/SpotlightPointer';
+import CookieConsent from './components/CookieConsent';
 
 const geistSans = Geist({
   subsets: ['latin'],
@@ -57,6 +59,7 @@ export default function RootLayout({ children }) {
         <SmoothScroll />
         <SpotlightPointer />
         {children}
+        <CookieConsent />
       </body>
     </html>
   );
